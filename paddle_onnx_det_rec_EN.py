@@ -517,6 +517,16 @@ class det_rec_functions(object):
             results.append(res[0])
             results_info.append(res)
         return results, results_info
+    def recognition_pil(self, img_list):
+        img_list = [cv2.resize(np.array(el), (320, 48)) for el in img_list] #custom changed img size
+        results = []
+        results_info = []
+        for pic in img_list:
+            cv2.imwrite('../rec_img/rec.jpg', pic)
+            res = self.get_img_res(self.onet_rec_session, pic, self.postprocess_op)
+            results.append(res[0])
+            results_info.append(res)
+        return results, results_info
 
 
 # if __name__ == '__main__':
